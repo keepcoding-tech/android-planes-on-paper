@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".gameplay_room.GameplayRoom">
+
+    <TextView
+            android:id="@+id/txt_playerOne"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_playerOneScore"
+            app:layout_constraintEnd_toStartOf="@+id/txt_playerOneScore"
+            android:layout_marginEnd="15dp"
+            android:text="@string/txt_playerOne"/>
+    <TextView
+            android:id="@+id/txt_playerOneScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_vs"
+            app:layout_constraintEnd_toStartOf="@+id/txt_vs"
+            android:layout_marginEnd="15dp"
+            android:text="@string/txt_playerOneScore"/>
+    <TextView
+            android:id="@+id/txt_vs"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="15dp"
+            android:text="@string/txt_vs"/>
+    <TextView
+            android:id="@+id/txt_playerTwoScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_vs"
+            app:layout_constraintStart_toEndOf="@+id/txt_vs"
+            android:layout_marginStart="15dp"
+            android:text="@string/txt_playerTwoScore"/>
+    <TextView
+            android:id="@+id/txt_playerTow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="@+id/txt_playerTwoScore"
+            app:layout_constraintStart_toEndOf="@+id/txt_playerTwoScore"
+            android:layout_marginStart="15dp"
+            android:text="@string/txt_playerTwo"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
