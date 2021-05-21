@@ -17,8 +17,13 @@ public class PreparationRoomApiData {
 		void onFailure(String message);
 	}
 
+	public interface SendingDataResponseListener {
+		void onResponse(String message);
+		void onFailure(String message);
+	}
+
 	// declaring and initialing basics data
-	private final String LINK = "https://8cbcc474bd82.ngrok.io/api/game/";
+	private final String LINK = "https://da16524fc9a7.ngrok.io/api/game/";
 	private final Retrofit apiClient = new Retrofit.Builder().baseUrl(LINK).addConverterFactory(GsonConverterFactory.create()).build();
 	private final PreparationRoomApiInterface apiInterface = apiClient.create(PreparationRoomApiInterface.class);
 
@@ -64,16 +69,20 @@ public class PreparationRoomApiData {
 		});
 	}
 
-	public void updatePlayerIsReady(Long gameID, String player, int[][] planesBorder) {
+	public void updatePlayerIsReady(Long gameID, String player, int[][] planesBorder, SendingDataResponseListener responseListener) {
 		final PlayerIsReadyRequest request = new PlayerIsReadyRequest(gameID, player, planesBorder);
 
 		Call<GameplayModel> call = apiInterface.updatePlayerIsReady(request);
 		call.enqueue(new Callback<GameplayModel>() {
 			@Override
-			public void onResponse(Call<GameplayModel> call, Response<GameplayModel> response) { }
+			public void onResponse(Call<GameplayModel> call, Response<GameplayModel> response) {
+				responseListener.onFailure("invalid planes border");
+			}
 
 			@Override
-			public void onFailure(Call<GameplayModel> call, Throwable t) { }
+			public void onFailure(Call<GameplayModel> call, Throwable t) {
+				responseListener.onResponse("ready to go");
+			}
 		});
 	}
 

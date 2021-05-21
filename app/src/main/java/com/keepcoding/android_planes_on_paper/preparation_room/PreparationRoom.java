@@ -93,18 +93,7 @@ public class PreparationRoom extends Activity {
 		dismissAlertDialog.show();
 
 		// initializing on click listener to all buttons
-		btn_playerIsReady.setOnClickListener(view -> {
-			int[][] planesBorder = new int[10][10];
-			PlanesGrid planesGrid = BorderEngine.getInstance().getGrid();
-			for(int x = 0; x < 10; x++) {
-				for(int y = 0; y < 10; y++) {
-					planesBorder[x][y] = planesGrid.getItem(x, y).getValue();
-				}
-			}
-
-			preparationRoomApiData.updatePlayerIsReady(gameID, player, planesBorder);
-			BorderEngine.getInstance().printBorder();
-		});
+		btn_playerIsReady.setOnClickListener(view -> playerIsReady());
 
 		btn_playerLeftGame.setOnClickListener(view -> {
 			AlertDialog.Builder leaveTheRoomDialog = new AlertDialog.Builder(PreparationRoom.this);
@@ -134,6 +123,29 @@ public class PreparationRoom extends Activity {
 	// before the second players is connected
 	public void deleteGameplay() {
 		preparationRoomApiData.deleteGameplay(gameID);
+	}
+
+	public void playerIsReady() {
+		int[][] planesBorder = new int[10][10];
+		PlanesGrid planesGrid = BorderEngine.getInstance().getGrid();
+		for(int x = 0; x < 10; x++) {
+			for(int y = 0; y < 10; y++) {
+				planesBorder[x][y] = planesGrid.getItem(x, y).getValue();
+			}
+		}
+
+		preparationRoomApiData.updatePlayerIsReady(gameID, player, planesBorder, new PreparationRoomApiData.SendingDataResponseListener() {
+			@Override
+			public void onResponse(String message) {
+				Toast.makeText(PreparationRoom.this, message, Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onFailure(String message) {
+				Toast.makeText(PreparationRoom.this, message, Toast.LENGTH_SHORT).show();
+			}
+		});
+		BorderEngine.getInstance().printBorder();
 	}
 
 	// change the status to not connected and return to the MainMenu screen
