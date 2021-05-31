@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">android-planes-on-paper</string>
+
+    <!--    edit text-->
+    <string name="et_playerNickname">NICKNAME</string>
+
+    <!--    buttons-->
+    <string name="btn_startGame">START GAME</string>
+    <string name="btn_playerIsReady">READY</string>
+    <string name="btn_playerLeftRoom">LEAVE</string>
+    <string name="btn_attack">ATTACK</string>
+    <string name="btn_surrender">SURRENDER</string>
+
+    <!--    text views-->
+    <string name="txt_playerOne">Player 1</string>
+    <string name="txt_playerOneScore">0</string>
+    <string name="txt_vs">VS</string>
+    <string name="txt_playerTwoScore">0</string>
+    <string name="txt_playerTwo">Player 2</string>
 </resources>
