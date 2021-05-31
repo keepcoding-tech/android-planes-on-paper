@@ -1,8 +1,9 @@
 package com.keepcoding.android_planes_on_paper;
 
 import com.keepcoding.android_planes_on_paper.preparation_room.PreparationRoom;
-import com.keepcoding.android_planes_on_paper.preparation_room.api_data.PreparationRoomApiData;
+import com.keepcoding.android_planes_on_paper.server_api_data.PreparationRoomApiData;
 import com.keepcoding.android_planes_on_paper.utilities.gameplay_models.GameplayModel;
+import com.keepcoding.android_planes_on_paper.utilities.gameplay_models.PlayerStatus;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -12,15 +13,20 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainMenu extends Activity {
+    // declaring game data
+    private String gameID;
+    private String playerOneNickname;
+    private String playerTwoNickname;
+
     // declaring layout components
     private EditText et_playerNickname;
     private Button btn_startGame;
 
     // declaring game data
-    public static final String GAME_ID = "com.keepcoding.roomID";
-    public static final String PLAYER = "com.keepcoding.player";
-    public static final String PLAYER_ONE_NICKNAME = "com.keepcoding.playerOneNickname";
-    public static final String PLAYER_TWO_NICKNAME = "com.keepcoding.playerTwoNickname";
+    private static final String GAME_ID = "com.keepcoding.gameID";
+    private static final String IDENTITY = "com.keepcoding.identity";
+    private static final String PLAYER_ONE_NICKNAME = "com.keepcoding.playerOneNickname";
+    private static final String PLAYER_TWO_NICKNAME = "com.keepcoding.playerTwoNickname";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,22 +47,22 @@ public class MainMenu extends Activity {
         Intent preparationRoomIntent = new Intent(MainMenu.this, PreparationRoom.class);
 
         PreparationRoomApiData preparationRoomConnection = new PreparationRoomApiData();
-        preparationRoomConnection.connectToRandomPreparationRoom(playerNickname, new PreparationRoomApiData.PreparationRoomResponseListener() {
+        preparationRoomConnection.connectToGameplayRoom(playerNickname, null, new PreparationRoomApiData.PreparationRoomResponseListener() {
             @Override
-            public void onResponse(GameplayModel apiGameModel, String message) {
-                final Long gameID = apiGameModel.getGameID();
-                final String playerOneNickname = apiGameModel.getPlayerOne().getPlayerNickname();
-                final String playerTwoNickname = apiGameModel.getPlayerTwo().getPlayerNickname();
+            public void onResponse(GameplayModel apiGameModel) {
+                gameID = apiGameModel.getGameID();
+                playerOneNickname = apiGameModel.getPlayerOne().getPlayerNickname();
 
-                if (!apiGameModel.getPlayerTwo().getIsConnected()) {
-                    preparationRoomIntent.putExtra(PLAYER, "playerOne");
+                if (apiGameModel.getPlayerTwo() == null) {
+                    preparationRoomIntent.putExtra(IDENTITY, PlayerStatus.PLAYER_ONE);
                 } else {
-                    preparationRoomIntent.putExtra(PLAYER, "playerTwo");
+                    playerTwoNickname = apiGameModel.getPlayerTwo().getPlayerNickname();
+                    preparationRoomIntent.putExtra(IDENTITY, PlayerStatus.PLAYER_TWO);
+                    preparationRoomIntent.putExtra(PLAYER_TWO_NICKNAME, playerTwoNickname);
                 }
 
                 preparationRoomIntent.putExtra(GAME_ID, gameID);
                 preparationRoomIntent.putExtra(PLAYER_ONE_NICKNAME, playerOneNickname);
-                preparationRoomIntent.putExtra(PLAYER_TWO_NICKNAME, playerTwoNickname);
 
                 startActivity(preparationRoomIntent);
             }

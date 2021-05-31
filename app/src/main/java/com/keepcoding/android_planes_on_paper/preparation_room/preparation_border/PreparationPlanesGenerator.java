@@ -1,13 +1,13 @@
-package com.keepcoding.android_planes_on_paper.utilities.planes_border;
+package com.keepcoding.android_planes_on_paper.preparation_room.preparation_border;
 
-public class PlanesGenerator {
-	private static PlanesGenerator instance;
+public class PreparationPlanesGenerator {
+	private static PreparationPlanesGenerator instance;
 
-	public PlanesGenerator() {}
+	public PreparationPlanesGenerator() {}
 
-	public static PlanesGenerator getInstance() {
+	public static PreparationPlanesGenerator getInstance() {
 		if (instance == null) {
-			instance = new PlanesGenerator();
+			instance = new PreparationPlanesGenerator();
 		}
 		return instance;
 	}

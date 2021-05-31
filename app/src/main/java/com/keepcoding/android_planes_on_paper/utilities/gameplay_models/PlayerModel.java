@@ -1,26 +1,23 @@
 package com.keepcoding.android_planes_on_paper.utilities.gameplay_models;
 
-public class GameplayPlayer {
+public class PlayerModel {
 	private String playerNickname;
-	private boolean isConnected;
 	private boolean hasSurrendered;
 	private boolean isReady;
 	private int destroyedPlanes;
 	private int[][] planesBorder;
 
 	// constructors
-	public GameplayPlayer() {}
+	public PlayerModel() {}
 
-	public GameplayPlayer(
+	public PlayerModel(
 			String playerNickname,
-			boolean isConnected,
 			boolean hasSurrendered,
 			boolean isReady,
 			int destroyedPlanes,
 			int[][] planesBorder
 	) {
 		this.playerNickname = playerNickname;
-		this.isConnected = isConnected;
 		this.hasSurrendered = hasSurrendered;
 		this.isReady = isReady;
 		this.destroyedPlanes = destroyedPlanes;
@@ -32,15 +29,11 @@ public class GameplayPlayer {
 		this.playerNickname = playerNickname;
 	}
 
-	public void setIsConnected(boolean isConnected) {
-		this.isConnected = isConnected;
-	}
-
 	public void setHasSurrendered(boolean isConnected) {
 		this.hasSurrendered = isConnected;
 	}
 
-	public void setReady(boolean ready) {
+	public void setIsReady(boolean ready) {
 		isReady = ready;
 	}
 
@@ -57,15 +50,11 @@ public class GameplayPlayer {
 		return playerNickname;
 	}
 
-	public boolean getIsConnected() {
-		return isConnected;
-	}
-
 	public boolean getHasSurrendered() {
 		return hasSurrendered;
 	}
 
-	public boolean isReady() {
+	public boolean getIsReady() {
 		return isReady;
 	}
 

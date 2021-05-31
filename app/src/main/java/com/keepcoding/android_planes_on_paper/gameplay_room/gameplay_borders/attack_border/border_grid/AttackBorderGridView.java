@@ -1,6 +1,7 @@
-package com.keepcoding.android_planes_on_paper.utilities.planes_border.border_grid;
+package com.keepcoding.android_planes_on_paper.gameplay_room.gameplay_borders.attack_border.border_grid;
 
-import com.keepcoding.android_planes_on_paper.utilities.planes_border.BorderEngine;
+import com.keepcoding.android_planes_on_paper.gameplay_room.GameplayRoom;
+import com.keepcoding.android_planes_on_paper.gameplay_room.gameplay_borders.attack_border.AttackBorderEngine;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -9,22 +10,24 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 
-public class BorderGridView extends GridView {
+public class AttackBorderGridView extends GridView {
 	private final Context context;
 
 	// constructors
-	public BorderGridView(Context context, AttributeSet attrs) {
+	public AttackBorderGridView(Context context, AttributeSet attrs) {
 		super(context, attrs);
 		this.context = context;
 
-		BorderGridViewAdaptor gridViewAdaptor = new BorderGridViewAdaptor(context);
-		setAdapter(gridViewAdaptor);
+		final GameplayRoom gameplayRoom = new GameplayRoom();
+		AttackBorderGridAdaptor gridAdaptor = new AttackBorderGridAdaptor();
+		setAdapter(gridAdaptor);
 
 		setOnItemClickListener((parent, view, position, id) -> {
 			int x = position / 10;
 			int y = position % 10;
 
-			BorderEngine.getInstance().setNumber(x, y);
+			AttackBorderEngine.getInstance().setSelectedPosX(x);
+			AttackBorderEngine.getInstance().setSelectedPosY(y);
 		});
 	}
 
@@ -33,12 +36,7 @@ public class BorderGridView extends GridView {
 		super.onMeasure(widthMeasureSpec, widthMeasureSpec);
 	}
 
-	static class BorderGridViewAdaptor extends BaseAdapter {
-		private final Context context;
-		public BorderGridViewAdaptor(Context context) {
-			this.context = context;
-		}
-
+	static class AttackBorderGridAdaptor extends BaseAdapter {
 		@Override
 		public int getCount() {
 			return 100;
@@ -56,7 +54,7 @@ public class BorderGridView extends GridView {
 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
-			return BorderEngine.getInstance().getGrid().getItem(position);
+			return AttackBorderEngine.getInstance().getAttackPlanesGrid().getAttackPlanesItem(position);
 		}
 	}
 }

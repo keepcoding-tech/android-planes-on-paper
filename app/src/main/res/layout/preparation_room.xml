@@ -20,7 +20,6 @@
             android:id="@+id/txt_VS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintHorizontal_bias="0.457"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -35,7 +34,7 @@
             android:layout_marginEnd="15dp"
             android:text="@string/txt_playerTwo"/>
 
-    <com.keepcoding.android_planes_on_paper.utilities.planes_border.border_grid.BorderGridView
+    <com.keepcoding.android_planes_on_paper.preparation_room.preparation_border.border_grid.PreparationBorderGridView
             android:id="@+id/grid_planesBorder"
             android:layout_width="0dp"
             android:layout_height="0dp"
@@ -48,13 +47,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_VS"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/btn_playerIsReady"
             android:layout_marginStart="15dp"
-            android:layout_marginTop="15dp"
-            android:layout_marginEnd="15dp"
-            android:layout_marginBottom="15dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="15dp">
 
-    </com.keepcoding.android_planes_on_paper.utilities.planes_border.border_grid.BorderGridView>
+    </com.keepcoding.android_planes_on_paper.preparation_room.preparation_border.border_grid.PreparationBorderGridView>
 
     <Button
             android:id="@+id/btn_playerIsReady"

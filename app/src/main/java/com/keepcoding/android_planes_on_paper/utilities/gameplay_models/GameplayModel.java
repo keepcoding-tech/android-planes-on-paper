@@ -1,74 +1,85 @@
 package com.keepcoding.android_planes_on_paper.utilities.gameplay_models;
 
 public class GameplayModel {
-	private Long gameID;
-	private GameplayStatus gameplayStatus;
-	private GameplayPlayer playerOne;
-	private GameplayPlayer playerTwo;
+	private String gameID;
+	private GameplayStatus gameStatus;
+	private PlayerStatus playerStatus;
+	private String accessToken;
+	private PlayerModel playerOne;
+	private PlayerModel playerTwo;
 
 	// constructors
 	public GameplayModel() {}
 
-	public GameplayModel(GameplayStatus gameplayStatus, GameplayPlayer playerOne) {
-		this.gameplayStatus = gameplayStatus;
-		this.playerOne = playerOne;
-	}
-
-	public GameplayModel(Long gameID, GameplayStatus gameplayStatus, GameplayPlayer playerOne) {
-		this.gameID = gameID;
-		this.gameplayStatus = gameplayStatus;
-		this.playerOne = playerOne;
-	}
-
 	public GameplayModel(
-			Long gameID,
-			GameplayStatus gameplayStatus,
-			GameplayPlayer playerOne,
-			GameplayPlayer playerTwo
+			GameplayStatus gameStatus,
+			PlayerStatus playerStatus,
+			PlayerModel playerOne,
+			PlayerModel playerTwo
 	) {
-		this.gameID = gameID;
-		this.gameplayStatus = gameplayStatus;
+		this.gameStatus = gameStatus;
+		this.playerStatus = playerStatus;
 		this.playerOne = playerOne;
 		this.playerTwo = playerTwo;
 	}
 
-	// toString
-	@Override
-	public String toString() {
-		return playerOne.getPlayerNickname() + "  VS  " + playerTwo.getPlayerNickname();
+	public GameplayModel(
+			GameplayStatus gameStatus,
+			PlayerStatus playerStatus,
+			String accessToken,
+			PlayerModel playerOne,
+			PlayerModel playerTwo
+	) {
+		this.gameStatus = gameStatus;
+		this.accessToken = accessToken;
+		this.playerStatus = playerStatus;
+		this.playerOne = playerOne;
+		this.playerTwo = playerTwo;
 	}
 
 	// setters
-	public void setGameID(Long gameID) {
-		this.gameID = gameID;
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
 
-	public void setGameplayStatus(GameplayStatus gamePlayStatus) {
-		this.gameplayStatus = gamePlayStatus;
+	public void setGameStatus(GameplayStatus gamePlayStatus) {
+		this.gameStatus = gamePlayStatus;
 	}
 
-	public void setPlayerOne(GameplayPlayer playerOne) {
+	public void setPlayerStatus(PlayerStatus playerStatus) {
+		this.playerStatus = playerStatus;
+	}
+
+	public void setPlayerOne(PlayerModel playerOne) {
 		this.playerOne = playerOne;
 	}
 
-	public void setPlayerTwo(GameplayPlayer playerTwo) {
+	public void setPlayerTwo(PlayerModel playerTwo) {
 		this.playerTwo = playerTwo;
 	}
 
 	// getters
-	public Long getGameID() {
+	public String getGameID() {
 		return gameID;
 	}
 
-	public GameplayStatus getGameplayStatus() {
-		return gameplayStatus;
+	public String getAccessToken() {
+		return accessToken;
 	}
 
-	public GameplayPlayer getPlayerOne() {
+	public GameplayStatus getGameStatus() {
+		return gameStatus;
+	}
+
+	public PlayerStatus getPlayerStatus() {
+		return playerStatus;
+	}
+
+	public PlayerModel getPlayerOne() {
 		return playerOne;
 	}
 
-	public GameplayPlayer getPlayerTwo() {
+	public PlayerModel getPlayerTwo() {
 		return playerTwo;
 	}
 }
