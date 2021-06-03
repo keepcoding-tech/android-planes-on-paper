@@ -33,13 +33,13 @@ public class GameplayRoomApiData {
 					final GameplayModel apiGameplayModel = response.body();
 					responseListener.onResponse(apiGameplayModel);
 				} else {
-					responseListener.onFailure("not cool");
+					responseListener.onFailure("problems with connection");
 				}
 			}
 
 			@Override
 			public void onFailure(Call<GameplayModel> call, Throwable t) {
-				responseListener.onFailure("not cool");
+				responseListener.onFailure("problems with connection");
 			}
 		});
 	}

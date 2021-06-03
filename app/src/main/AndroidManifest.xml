@@ -1,45 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.keepcoding.android_planes_on_paper">
+    package="com.keepcoding.android_planes_on_paper" >
 
-<!--    get internet permission-->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <!-- get internet permission -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_round"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.Android_planes_on_paper"
-            android:fullBackupContent="true">
+        android:allowBackup="true"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Android_planes_on_paper" >
+        <!-- ACTIVITIES -->
 
-<!--        ACTIVITIES-->
-<!--        GameplayRoom-->
+        <!-- PrivateRoomMenu-->
         <activity
-                android:name=".gameplay_room.GameplayRoom"
-                android:screenOrientation="portrait"
-                android:parentActivityName=".MainMenu">
-        </activity>
-
-<!--        PreparationRoom-->
-        <activity
-                android:name=".preparation_room.PreparationRoom"
-                android:screenOrientation="portrait"
-                android:parentActivityName=".MainMenu">
-        </activity>
-
-<!--        ManiMenu-->
-        <activity
-                android:name=".MainMenu"
+                android:name=".PrivateRoomMenu"
+                android:parentActivityName=".MainMenu"
                 android:screenOrientation="portrait">
+        </activity>
 
+        <!-- RandomRoomMenu-->
+        <activity
+        android:name=".RandomRoomMenu"
+        android:parentActivityName=".MainMenu"
+        android:screenOrientation="portrait">
+        </activity>
+
+        <!-- GameplayRoom -->
+        <activity
+            android:name=".gameplay_room.GameplayRoom"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- PreparationRoom -->
+        <activity
+            android:name=".preparation_room.PreparationRoom"
+            android:parentActivityName=".MainMenu"
+            android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- ManiMenu -->
+        <activity
+            android:name=".MainMenu"
+            android:screenOrientation="portrait" >
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
+
 </manifest>

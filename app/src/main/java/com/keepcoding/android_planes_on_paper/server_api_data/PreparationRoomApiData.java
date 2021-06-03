@@ -28,7 +28,7 @@ public class PreparationRoomApiData {
 	private final Retrofit apiClient = new Retrofit.Builder().baseUrl(LINK).addConverterFactory(GsonConverterFactory.create()).build();
 	private final ServerApiInterface apiInterface = apiClient.create(ServerApiInterface.class);
 
-	public void connectToGameplayRoom(String playerNickname, String accessToken, PreparationRoomResponseListener preparationRoomResponseListener) {
+	public void connectToGameplayRoom(String playerNickname, String accessToken, PreparationRoomResponseListener responseListener) {
 		final ConnectToGameRequest request = new ConnectToGameRequest(playerNickname, accessToken);
 		Call<GameplayModel> call = apiInterface.connectToGameplayRoom(request);
 
@@ -37,15 +37,36 @@ public class PreparationRoomApiData {
 			public void onResponse(Call<GameplayModel> call, Response<GameplayModel> response) {
 				if (response.isSuccessful() && response.body() != null) {
 					final GameplayModel apiGameModel = response.body();
-					preparationRoomResponseListener.onResponse(apiGameModel);
+					responseListener.onResponse(apiGameModel);
 				} else {
-					preparationRoomResponseListener.onFailure("could not connect to preparation room");
+					responseListener.onFailure("could not connect to random game room");
 				}
 			}
 
 			@Override
 			public void onFailure(Call<GameplayModel> call, Throwable t) {
-				preparationRoomResponseListener.onFailure("could not connect to preparation room");
+				responseListener.onFailure("could not connect to random game room");
+			}
+		});
+	}
+
+	public void createNewGameplayRoom(String playerNickname, PreparationRoomResponseListener responseListener) {
+		Call<GameplayModel> call = apiInterface.createNewGameplayRoom(playerNickname);
+
+		call.enqueue(new Callback<GameplayModel>() {
+			@Override
+			public void onResponse(Call<GameplayModel> call, Response<GameplayModel> response) {
+				if (response.isSuccessful() && response.body() != null) {
+					final GameplayModel apiGameModel = response.body();
+					responseListener.onResponse(apiGameModel);
+				} else {
+					responseListener.onFailure("could not create private game room");
+				}
+			}
+
+			@Override
+			public void onFailure(Call<GameplayModel> call, Throwable t) {
+				responseListener.onFailure("could not create private game room");
 			}
 		});
 	}
