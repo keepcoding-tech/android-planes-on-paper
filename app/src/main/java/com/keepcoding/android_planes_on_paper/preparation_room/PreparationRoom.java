@@ -36,7 +36,7 @@ public class PreparationRoom extends Activity {
 	private String playerTwoNickname;
 	private int[][] homeBorder = new int[10][10];
 
-	private AlertDialog.Builder leaveAlertDialog;
+	private AlertDialog.Builder secondPlayerAlertDialog;
 	private AlertDialog dismissAlertDialog;
 	private Timer searchForPlayerTimer = new Timer();
 	private Timer checkForUpdatesTimer = new Timer();
@@ -62,6 +62,7 @@ public class PreparationRoom extends Activity {
 	private static final String PLAYER_TWO_NICKNAME = "com.keepcoding.playerTwoNickname";
 	private static final String HOME_BORDER = "com.keepcoding.homeBorder";
 	private static final String ATTACK_BORDER = "com.keepcoding.attackBorder";
+	private static final String ALERT_DIALOG_TITLE = "com.keepcoding.alertDialogTitle";
 
 	// cancel timer when leaving
 	@Override
@@ -69,6 +70,7 @@ public class PreparationRoom extends Activity {
 		super.onDestroy();
 		checkForUpdatesTimer.cancel();
 		searchForPlayerTimer.cancel();
+		dismissAlertDialog.dismiss();
 	}
 
 	@Override
@@ -92,20 +94,22 @@ public class PreparationRoom extends Activity {
 		identity = (PlayerStatus) dataIntent.getSerializableExtra(IDENTITY);
 		playerOneNickname = dataIntent.getStringExtra(PLAYER_ONE_NICKNAME);
 		playerTwoNickname = dataIntent.getStringExtra(PLAYER_TWO_NICKNAME);
+		String alertDialogTitle = dataIntent.getStringExtra(ALERT_DIALOG_TITLE);
 
 		txt_playerOneNickname.setText(playerOneNickname);
 		txt_playerTwoNickname.setText(playerTwoNickname);
 
 		// initializing alert dialog
-		leaveAlertDialog = new AlertDialog.Builder(PreparationRoom.this);
-		leaveAlertDialog.setCancelable(false);
-		leaveAlertDialog.setTitle("searching for players. . .");
-		leaveAlertDialog.setPositiveButton("LEAVE", (dialog, which) -> {
+		secondPlayerAlertDialog = new AlertDialog.Builder(PreparationRoom.this);
+		secondPlayerAlertDialog.setCancelable(false);
+		secondPlayerAlertDialog.setTitle(alertDialogTitle);
+		secondPlayerAlertDialog.setPositiveButton("LEAVE", (dialog, which) -> {
 			setSurrendered();
 			deleteGameplayRoom();
+			dialog.dismiss();
 		});
 
-		dismissAlertDialog = leaveAlertDialog.create();
+		dismissAlertDialog = secondPlayerAlertDialog.create();
 		dismissAlertDialog.show();
 
 		// initializing on click listener to all buttons
@@ -218,8 +222,8 @@ public class PreparationRoom extends Activity {
 	// check if the other player left the room and notify the player
 	private void checkPlayerConnectivity(boolean hasSurrendered) {
 		if (hasSurrendered) {
-			leaveAlertDialog.setTitle("the other player left the room");
-			leaveAlertDialog.create().show();
+			dismissAlertDialog.setTitle("the other player left the room");
+			dismissAlertDialog.show();
 		}
 	}
 

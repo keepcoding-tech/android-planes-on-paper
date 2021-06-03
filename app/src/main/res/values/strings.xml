@@ -2,10 +2,15 @@
     <string name="app_name">android-planes-on-paper</string>
 
     <!--    edit text-->
-    <string name="et_playerNickname">NICKNAME</string>
+    <string name="et_nickname">NICKNAME</string>
+    <string name="et_accessToken">ACCESS TOKEN</string>
 
     <!--    buttons-->
     <string name="btn_startGame">START GAME</string>
+    <string name="btn_randomGame">RANDOM GAME</string>
+    <string name="btn_privateGame">PRIVATE GAME</string>
+    <string name="btn_joinGame">JOIN GAME</string>
+    <string name="btn_createGame">CREATE GAME</string>
     <string name="btn_playerIsReady">READY</string>
     <string name="btn_playerLeftRoom">LEAVE</string>
     <string name="btn_attack">ATTACK</string>
